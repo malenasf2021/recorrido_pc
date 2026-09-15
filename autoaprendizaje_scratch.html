@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autoaprendizaje · Scratch</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #244a87;
+  --mid:     #4e5e77;
+  --lavender:#8e84b7;
+  --sand:    #c3ae94;
+  --white:   #ffffff;
+  --offwhite:#f7f5f1;
+  --light:   #eceaf6;
+  --border:  rgba(36,74,135,.1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--offwhite);
+  color: var(--mid);
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed; top: 0; left: 0; right: 0; height: 5px;
+  background: linear-gradient(90deg, var(--navy), var(--lavender), var(--sand));
+  z-index: 100;
+}
+
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ── HEADER ── */
+.header {
+  padding: 52px 0 40px;
+}
+.eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--sand);
+  margin-bottom: 14px;
+}
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(30px, 6vw, 48px);
+  line-height: 1.08;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.header h1 em {
+  font-style: italic;
+  color: var(--lavender);
+}
+.header-sub {
+  font-size: 15px; color: var(--mid); opacity: .7; line-height: 1.6;
+  max-width: 520px;
+  margin-top: 12px;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--sand), transparent);
+  margin-bottom: 36px;
+}
+
+/* ── INTRO BOX ── */
+.intro-box {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--navy);
+  border-radius: 12px;
+  padding: 20px 22px;
+  font-size: 14px; line-height: 1.75; color: var(--mid);
+  margin-bottom: 36px;
+}
+.intro-box strong { color: var(--navy); }
+
+/* ── STEP ── */
+.step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0 20px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+/* vertical connector */
+.step:not(:last-child) .step-spine::after {
+  content: '';
+  position: absolute;
+  left: 27px;
+  top: 56px;
+  bottom: -12px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--lavender), transparent);
+}
+
+.step-left {
+  display: flex; flex-direction: column; align-items: center;
+  position: relative;
+}
+
+.step-num {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; font-size: 20px;
+  flex-shrink: 0;
+  position: relative; z-index: 1;
+  transition: transform .2s;
+}
+
+/* color per step */
+.step:nth-child(1) .step-num { background: var(--navy);    color: var(--white); }
+.step:nth-child(2) .step-num { background: var(--mid);     color: var(--white); }
+.step:nth-child(3) .step-num { background: var(--lavender);color: var(--white); }
+.step:nth-child(4) .step-num { background: var(--navy);    color: var(--white); }
+.step:nth-child(5) .step-num { background: var(--mid);     color: var(--white); }
+.step:nth-child(6) .step-num { background: var(--lavender);color: var(--white); }
+.step:nth-child(7) .step-num { background: var(--sand);    color: var(--white); }
+
+.step-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 16px rgba(36,74,135,.06);
+  margin-bottom: 0;
+  transition: box-shadow .2s, transform .2s;
+  cursor: default;
+}
+.step-card:hover {
+  box-shadow: 0 6px 28px rgba(36,74,135,.12);
+  transform: translateY(-2px);
+}
+.step:hover .step-num { transform: scale(1.06); }
+
+.step-order {
+  font-size: 10px; font-weight: 700; letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.step:nth-child(1) .step-order { color: var(--navy); }
+.step:nth-child(2) .step-order { color: var(--mid); }
+.step:nth-child(3) .step-order { color: var(--lavender); }
+.step:nth-child(4) .step-order { color: var(--navy); }
+.step:nth-child(5) .step-order { color: var(--mid); }
+.step:nth-child(6) .step-order { color: var(--lavender); }
+.step:nth-child(7) .step-order { color: var(--sand); }
+
+.step-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700; font-size: 17px; line-height: 1.35;
+  color: #1a2a42;
+  margin-bottom: 8px;
+}
+
+.step-desc {
+  font-size: 14px; line-height: 1.65; color: var(--mid);
+}
+
+.step-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-top: 12px;
+  padding: 4px 11px;
+  border-radius: 20px;
+  font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.tag-read    { background: rgba(36,74,135,.08);   color: var(--navy); }
+.tag-do      { background: rgba(142,132,183,.12);  color: var(--lavender); }
+.tag-watch   { background: rgba(195,174,148,.18);  color: #7a6540; }
+.tag-listen  { background: rgba(78,94,119,.1);     color: var(--mid); }
+.tag-explore { background: rgba(142,132,183,.12);  color: var(--lavender); }
+
+/* icons via unicode */
+.tag-read::before    { content: '🎯'; font-size: 13px; }
+.tag-do::before      { content: '✏️'; font-size: 13px; }
+.tag-watch::before   { content: '💡'; font-size: 13px; }
+.tag-listen::before  { content: '📁'; font-size: 13px; }
+.tag-explore::before { content: '🔄'; font-size: 13px; }
+
+/* ── FOOTER NOTE ── */
+.footer-note {
+  margin-top: 40px;
+  padding: 18px 22px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--sand);
+  border-radius: 12px;
+  font-size: 13px; line-height: 1.7; color: var(--mid);
+}
+.footer-note strong { color: var(--navy); }
+
+@media (max-width: 480px) {
+  .step { grid-template-columns: 44px 1fr; gap: 0 14px; }
+  .step-num { width: 44px; height: 44px; font-size: 16px; }
+  .step:not(:last-child) .step-spine::after { left: 21px; top: 44px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="eyebrow">Scratch · Autoaprendizaje</div>
+    <h1>Ejercicios de <em>autoaprendizaje</em><br>(no calificables)</h1>
+    <p class="header-sub">Un recorrido para practicar y fortalecer tus habilidades en Scratch, a tu propio ritmo.</p>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="intro-box">
+    Los ejercicios incluidos en esta carpeta <strong>no son actividades entregables ni calificables</strong>, por lo que su realización es opcional. Sin embargo, se recomienda realizarlos para adquirir mayor confianza en el uso de los bloques de programación y en la resolución de problemas.
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-left step-spine">
+      <div class="step-num">1</div>
+    </div>
+    <div class="step-card">
+      <div class="step-order">Objetivo</div>
+      <div class="step-title">Practicar y fortalecer tus habilidades</div>
+      <div class="step-desc">
+        Estos ejercicios tienen como fin que practiques y fortalezcas tus habilidades en Scratch, ganando soltura con los bloques de programación.
+      </div>
+      <span class="step-tag tag-read">Objetivo</span>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-left step-spine">
+      <div class="step-num">2</div>
+    </div>
+    <div class="step-card">
+      <div class="step-order">Reproducí</div>
+      <div class="step-title">Reproducí cada ejercicio en Scratch</div>
+      <div class="step-desc">
+        La propuesta consiste en reproducir cada ejercicio, prestando especial atención a la lógica utilizada para resolverlo. Esto te permitirá comprender mejor el funcionamiento de los bloques y las estrategias de programación empleadas.
+      </div>
+      <span class="step-tag tag-do">Actividad</span>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-left step-spine">
+      <div class="step-num">3</div>
+    </div>
+    <div class="step-card">
+      <div class="step-order">Explorá</div>
+      <div class="step-title">Buscá diferentes formas de llegar al mismo resultado</div>
+      <div class="step-desc">
+        Modificá bloques, probá nuevas ideas y comparuen distintas soluciones. La finalidad no es únicamente obtener un resultado correcto, sino comprender la lógica detrás de cada propuesta y descubrir que un mismo problema puede resolverse de múltiples maneras.
+      </div>
+      <span class="step-tag tag-explore">Explorar</span>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="step-left step-spine">
+      <div class="step-num">4</div>
+    </div>
+    <div class="step-card">
+      <div class="step-order">Analizá</div>
+      <div class="step-title">Usalos como modelos para tu trabajo final</div>
+      <div class="step-desc">
+        Estos ejercicios funcionan también como modelos o plantillas de referencia para el desarrollo del trabajo final. Analizarlos y recrearlos te permitirá identificar estructuras, recursos y estrategias que luego podrás adaptar e incorporar en tu propio proyecto.
+      </div>
+      <span class="step-tag tag-read">Analizar</span>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step">
+    <div class="step-left">
+      <div class="step-num">5</div>
+    </div>
+    <div class="step-card">
+      <div class="step-order">Inspirate</div>
+      <div class="step-title">Proyectos de estudiantes de años anteriores</div>
+      <div class="step-desc">
+        Encontrarás una carpeta con proyectos realizados por estudiantes en años anteriores. Sirven como ejemplos e inspiración, mostrando diferentes enfoques, niveles de complejidad y formas de aplicar los conceptos trabajados durante el curso.
+      </div>
+      <span class="step-tag tag-listen">Ver carpeta</span>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <strong>💡 Consejo:</strong> No hay una única forma correcta de resolver cada ejercicio. Animate a probar, equivocarte y comparar tus soluciones con las de otros: ahí está gran parte del aprendizaje.
+  </div>
+
+</div>
+</body>
+</html>
